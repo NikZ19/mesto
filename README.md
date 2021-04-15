@@ -1,4 +1,4 @@
-* [Проект 4: Место] (https://nikz19.github.io/mesto/)
+* [Проект 4: Место](https://nikz19.github.io/mesto/)
 
 ### Обзор
 
