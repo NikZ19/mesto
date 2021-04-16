@@ -22,12 +22,12 @@
         <div class="profile__text">
           <div class="profile__name-wrapper">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-btn"></button>
+            <button class="profile__edit-btn" type="button" aria-label="Кнопка редактировать"></button>
           </div>
           <p class="profile__about">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add-btn"></button>
+      <button class="profile__add-btn" type="submit" aria-label="Кнопка добавить"></button>
     </section>
     <section class="places">
       <ul class="places__items">
@@ -35,42 +35,42 @@
           <img class="places__photo" src="./images/karachevsk.jpg" alt="Фото Карачаевск">
           <div class="places__info">
             <h2 class="places__title">Карачаевск</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="places__item">
-          <img class="places__photo" src="./images/elbrus.png" alt="Фото Гора Эльбрус">
+          <img class="places__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
           <div class="places__info">
             <h2 class="places__title">Гора Эльбрус</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="places__item">
-          <img class="places__photo" src="./images/dombay.png" alt="Фото Домбай">
+          <img class="places__photo" src="./images/dombay.jpg" alt="Фото Домбай">
           <div class="places__info">
             <h2 class="places__title">Домбай</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="places__item">
           <img class="places__photo" src="./images/karachevsk.jpg" alt="Фото Карачаевск">
           <div class="places__info">
             <h2 class="places__title">Карачаевск</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="places__item">
-          <img class="places__photo" src="./images/elbrus.png" alt="Фото Гора Эльбрус">
+          <img class="places__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
           <div class="places__info">
             <h2 class="places__title">Гора Эльбрус</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="places__item">
-          <img class="places__photo" src="./images/dombay.png" alt="Фото Домбай">
+          <img class="places__photo" src="./images/dombay.jpg" alt="Фото Домбай">
           <div class="places__info">
             <h2 class="places__title">Домбай</h2>
-            <button class="places__like"></button>
+            <button class="places__like" type="button" aria-label="Лайк"></button>
           </div>
         </li>
       </ul>
@@ -82,10 +82,13 @@
   <div class="popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__input popup__input_name" type="text">
-      <input class="popup__input popup__input_about" type="text">
-      <button class="popup__close-btn"></button>
-      <button class="popup__save-btn">Сохранить</button>
+      <form class="popup__form"  name="popup">
+        <input class="popup__input popup__input_el_name" name="name" type="text">
+        <input class="popup__input popup__input_el_about" name="about" type="text">
+        <button class="popup__save-btn" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-btn" type="button" aria-label="Кнопка закрыть"></button>
+
     </div>
   </div>
   <script src="./scripts/index.js"></script>

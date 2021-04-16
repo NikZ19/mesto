@@ -2,13 +2,14 @@
   background-image: url(../../../images/close.svg);
   background-position: center;
   background-color: transparent;
+  background-size: cover;
   padding: 0;
   margin: 0;
-  height: 40px;
-  width: 40px;
+  height: 57px;
+  width: 57px;
   position: absolute;
-  right: -40px;
-  top: -40px;
+  right: -49px;
+  top: -50px;
   border: 0;
   cursor: pointer;
   transition: 0.4s ease-in-out;
@@ -20,8 +21,8 @@
 
 @media screen and (max-width: 500px) {
   .popup__close-btn {
-    height: 26px;
-    width: 26px;
-    right: 0;
+    right: 0px;
+    height: 37px;
+    width: 37px;
   }
 }
