@@ -1,5 +1,5 @@
 .places__like {
-  background-image: url(../../../images/Like.svg);
+  background-image: url(../../../images/like.svg);
   width: 22px;
   height: 19px;
   border: 0;
@@ -11,5 +11,5 @@
 }
 
 .places__like:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
