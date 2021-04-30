@@ -31,66 +31,47 @@
     </section>
     <section class="places">
       <ul class="places__items">
-        <li class="places__item">
-          <img class="places__photo" src="./images/karachevsk.jpg" alt="Фото Карачаевск">
-          <div class="places__info">
-            <h2 class="places__title">Карачаевск</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="places__item">
-          <img class="places__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
-          <div class="places__info">
-            <h2 class="places__title">Гора Эльбрус</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="places__item">
-          <img class="places__photo" src="./images/dombay.jpg" alt="Фото Домбай">
-          <div class="places__info">
-            <h2 class="places__title">Домбай</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="places__item">
-          <img class="places__photo" src="./images/karachevsk.jpg" alt="Фото Карачаевск">
-          <div class="places__info">
-            <h2 class="places__title">Карачаевск</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="places__item">
-          <img class="places__photo" src="./images/elbrus.jpg" alt="Фото Гора Эльбрус">
-          <div class="places__info">
-            <h2 class="places__title">Гора Эльбрус</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="places__item">
-          <img class="places__photo" src="./images/dombay.jpg" alt="Фото Домбай">
-          <div class="places__info">
-            <h2 class="places__title">Домбай</h2>
-            <button class="places__like" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
   </main>
   <footer class="footer root__container">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
-  <div class="popup">
+
+  <div class="popup" id="popup-edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form"  name="popup">
+      <form class="popup__form" name="form_edit">
         <input class="popup__input popup__input_el_name" name="name" type="text">
         <input class="popup__input popup__input_el_about" name="about" type="text">
         <button class="popup__save-btn" type="submit">Сохранить</button>
       </form>
-      <button class="popup__close-btn" type="button" aria-label="Кнопка закрыть"></button>
-
+      <button class="popup__close-btn" id="close-edit" type="button" aria-label="Кнопка закрыть"></button>
     </div>
   </div>
+
+  <div class="popup" id="popup-add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="form_add">
+        <input class="popup__input popup__input_el_name" name="name" type="text" placeholder="Название">
+        <input class="popup__input popup__input_el_about" name="about" type="text" placeholder="Ссылка на картинку">
+        <button class="popup__save-btn" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-btn" id="close-add" type="button" aria-label="Кнопка закрыть"></button>
+    </div>
+  </div>
+
+  <template id="card">
+    <li class="places__item">
+      <img class="places__photo">
+      <div class="places__info">
+        <h2 class="places__title"></h2>
+        <button class="places__like" type="button" aria-label="Лайк"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
