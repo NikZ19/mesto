@@ -109,7 +109,6 @@ function createCard(itemData) {  // создание карточки
 
   cardImage.addEventListener('click', function () { // увеличение фотографии карточки
     switchPopup(popupScalePhoto);
-    // popupScalePhoto.classList.add('popup_opened');
     photoPopup.src = itemData.link;
     photoPopup.alt = 'Фото ' + itemData.name;
     captionPopup.textContent = itemData.name;
