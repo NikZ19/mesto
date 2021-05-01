@@ -63,9 +63,18 @@
     </div>
   </div>
 
+  <div class="popup popup_type_photo-scale" id="popup-fullsize">
+    <figure class="popup__photo-container">
+      <img class="popup__image">
+      <figcaption class="popup__caption"></figcaption>
+      <button class="popup__close-btn" id="close-fullsize" type="button" aria-label="Кнопка закрыть"></button>
+    </figure>
+  </div>
+
   <template id="card">
     <li class="places__item">
       <img class="places__photo">
+      <button class="places__trash" type="button" aria-label="Кнопка удалить"></button>
       <div class="places__info">
         <h2 class="places__title"></h2>
         <button class="places__like" type="button" aria-label="Лайк"></button>
