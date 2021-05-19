@@ -4,6 +4,8 @@ const existAbout = document.querySelector('.profile__about'); // находим 
 const formPopupEdit = document.forms.form_edit; // находим форму редактирвания
 const inputName = formPopupEdit.input_name; // находим инпут для имени
 const inputAbout = formPopupEdit.input_about; // находим инпут для описания
+const submitButtonEdit = formPopupEdit.submit_btn_edit;
+
 
 const popupEdit = document.querySelector('#popup-edit'); // находим блок попап редактирования профиля
 const editButton = document.querySelector('.profile__edit-btn'); // находим кнопку редактирования профиля
@@ -12,6 +14,7 @@ const closePopupEdit = document.querySelector('#close-edit'); // находим 
 const formPopupAdd = document.forms.form_add; // находим форму добавления карточки
 const inputTitle = formPopupAdd.input_title; // находим инпут для названия
 const inputLink = formPopupAdd.input_link; // находим инпут для ссылки
+const submitButtonAdd = formPopupAdd.submit_btn_add;
 
 const popupAdd = document.querySelector('#popup-add'); // находим блок попап дообавления карточки
 const addButton = document.querySelector('.profile__add-btn'); // находим кнопку добавления карточки
@@ -25,49 +28,20 @@ const photoPopup = popupScalePhoto.querySelector('.popup__image'); // фото �
 const cardsList = document.querySelector('.places__items'); // находим контейнер для вставки
 const cardTemplate = document.querySelector('#card'); // находим темплейт тег
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-
 // функции
 
 // открытие попапа
 function showPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscape);
-	document.addEventListener('click', closePopupOverlay);
-  enableValidation(config);
+	document.addEventListener('mousedown', closePopupOverlay);
 }
 
 // закрытие попапа
 function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEscape);
-	document.removeEventListener('click', closePopupOverlay);
+	document.removeEventListener('mousedown', closePopupOverlay);
 }
 // закрытие попапа по оверлею
 function closePopupOverlay(e) {
@@ -83,7 +57,7 @@ function closePopupEscape(e) {
  }
 
 // сабмит формы редактирования профиля
-function editFormSubmit(e) {
+function handleProfileFormSubmit(e) {
   e.preventDefault();
   existName.textContent = inputName.value;
   existAbout.textContent = inputAbout.value;
@@ -91,11 +65,12 @@ function editFormSubmit(e) {
 }
 
 // сабмит формы добавления карточки
-function addFormSubmit(e) {
+function handleCardFormSubmit(e) {
   e.preventDefault();
   const addNewCard = { name: inputTitle.value, link: inputLink.value };
   cardsList.prepend(createCard(addNewCard));
   formPopupAdd.reset();
+
   hidePopup(popupAdd);
 }
 
@@ -133,86 +108,28 @@ function createCard(itemData) {
   return newCard;
 }
 
-  // добавление карточек по умолчанию
+// добавление карточек по умолчанию
 initialCards.forEach(currentItem => {
   const newCards = createCard(currentItem);
   cardsList.append(newCards);
 });
-
-// цепочка функций валидации
-
-function showErrorMessage(inputElement, errorElement, inputErrorClass, errorClass) {
-  inputElement.classList.add(inputErrorClass);
-  errorElement.classList.add(errorClass);
-  errorElement.textContent = inputElement.validationMessage;
-}
-
-function hideErrorMessage(inputElement, errorElement, inputErrorClass, errorClass) {
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(errorClass);
-  errorElement.textContent = '';
-}
-
-function hasInvalidInput(inputList) {
-  return inputList.every((inputElement) => inputElement.validity.valid);
-}
-
-function checkInputValidity(inputElement, formElement, { inputErrorClass, errorClass }) {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  if (inputElement.validity.valid) {
-    hideErrorMessage(inputElement, errorElement, inputErrorClass, errorClass);
-  } else {
-    showErrorMessage(inputElement, errorElement, inputErrorClass, errorClass);
-  }
-}
-
-function toggleButtonState(inputList, buttonElement, inactiveClass) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.remove(inactiveClass);
-    buttonElement.disabled = false;
-  } else {
-    buttonElement.classList.add(inactiveClass);
-    buttonElement.disabled = true;
-  }
-}
-
-function setEventListeners(formElement, { inputSelector, submitButtonSelector, inactiveButtonClass, ...restConfig }) {
-  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  const submitButtonElement = formElement.querySelector(submitButtonSelector);
-
-  toggleButtonState(inputList, submitButtonElement, inactiveButtonClass);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      checkInputValidity(inputElement, formElement, restConfig);
-      toggleButtonState(inputList, submitButtonElement, inactiveButtonClass);
-    });
-    editButton.addEventListener('click', () => {
-      checkInputValidity(inputElement, formElement, restConfig);
-      toggleButtonState(inputList, submitButtonElement, inactiveButtonClass);
-    });
-
-  });
-}
-
-function enableValidation({ formSelector, ...restConfig }) {
-  Array.from(document.querySelectorAll(formSelector)).forEach((formElement) => {
-    formElement.addEventListener('submit', (e) => {
-      e.preventDefault();
-    });
-    setEventListeners(formElement, restConfig);
-  });
-}
 
 // вызовы обработчиков
 
 editButton.addEventListener('click', () => {
   inputName.value = existName.textContent;
   inputAbout.value = existAbout.textContent;
+  hideErrorMessage(inputName, document.querySelector(`#input-name-error`), config.inputErrorClass, config.errorClass);
+  hideErrorMessage(inputAbout, document.querySelector(`#input-about-error`), config.inputErrorClass, config.errorClass);
+  toggleButtonState([ inputName, inputAbout ], submitButtonEdit, config.inactiveButtonClass);
   showPopup(popupEdit);
 });
 
 addButton.addEventListener('click', () => {
+  hideErrorMessage(inputTitle, document.querySelector(`#input-title-error`), config.inputErrorClass, config.errorClass);
+  hideErrorMessage(inputLink, document.querySelector(`#input-link-error`), config.inputErrorClass, config.errorClass);
+  toggleButtonState([ inputTitle, inputLink ], submitButtonAdd, config.inactiveButtonClass);
+  formPopupAdd.reset();
   showPopup(popupAdd);
 });
 
@@ -228,6 +145,6 @@ closePopupPhoto.addEventListener('click', () => {
   hidePopup(popupScalePhoto);
 });
 
-formPopupEdit.addEventListener('submit', editFormSubmit);
+formPopupEdit.addEventListener('submit', handleProfileFormSubmit);
 
-formPopupAdd.addEventListener('submit', addFormSubmit);
+formPopupAdd.addEventListener('submit', handleCardFormSubmit);
