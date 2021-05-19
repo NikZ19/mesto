@@ -52,24 +52,51 @@ const initialCards = [
   }
 ];
 
+
 // функции
 
 // открытие попапа
 function showPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
+	document.addEventListener('click', closePopupOverlay);
   enableValidation(config);
 }
 
 // закрытие попапа
 function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
+	document.removeEventListener('click', closePopupOverlay);
 }
+// закрытие попапа по оверлею
+function closePopupOverlay(e) {
+  if (e.target.classList.contains('popup_opened')) {
+    hidePopup(document.querySelector('.popup_opened'));
+  }
+ }
+// закрытие попапа на клавишу Esc
+function closePopupEscape(e) {
+  if (e.key === 'Escape') {
+    hidePopup(document.querySelector('.popup_opened'));
+  }
+ }
 
+// сабмит формы редактирования профиля
 function editFormSubmit(e) {
   e.preventDefault();
   existName.textContent = inputName.value;
   existAbout.textContent = inputAbout.value;
   hidePopup(popupEdit);
+}
+
+// сабмит формы добавления карточки
+function addFormSubmit(e) {
+  e.preventDefault();
+  const addNewCard = { name: inputTitle.value, link: inputLink.value };
+  cardsList.prepend(createCard(addNewCard));
+  formPopupAdd.reset();
+  hidePopup(popupAdd);
 }
 
 // создание карточки
@@ -105,7 +132,8 @@ function createCard(itemData) {
 
   return newCard;
 }
-// добавление карточки
+
+  // добавление карточек по умолчанию
 initialCards.forEach(currentItem => {
   const newCards = createCard(currentItem);
   cardsList.append(newCards);
@@ -178,37 +206,28 @@ function enableValidation({ formSelector, ...restConfig }) {
 
 // вызовы обработчиков
 
-editButton.addEventListener('click', function () {
+editButton.addEventListener('click', () => {
   inputName.value = existName.textContent;
   inputAbout.value = existAbout.textContent;
   showPopup(popupEdit);
 });
 
-addButton.addEventListener('click', function () {
+addButton.addEventListener('click', () => {
   showPopup(popupAdd);
 });
 
-closePopupEdit.addEventListener('click', function () {
+closePopupEdit.addEventListener('click', () => {
   hidePopup(popupEdit);
 });
 
-closePopupAdd.addEventListener('click', function () {
+closePopupAdd.addEventListener('click', () => {
   hidePopup(popupAdd);
 });
 
-closePopupPhoto.addEventListener('click', function () {
+closePopupPhoto.addEventListener('click', () => {
   hidePopup(popupScalePhoto);
 });
 
 formPopupEdit.addEventListener('submit', editFormSubmit);
 
-// обработка формы добавления карточки
-formPopupAdd.addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const addNewCard = { name: inputTitle.value, link: inputLink.value };
-  cardsList.prepend(createCard(addNewCard));
-  formPopupAdd.reset();
-
-  hidePopup(popupAdd);
-});
+formPopupAdd.addEventListener('submit', addFormSubmit);
