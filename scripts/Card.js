@@ -12,7 +12,7 @@ export default class Card {
   }
 
   _makeElement() {
-    const cardTemplate = document.querySelector(this._templateSelector).content.querySelector('.places__item');
+    const cardTemplate = this._templateSelector.content.querySelector('.places__item');
     this._cardElement = cardTemplate.cloneNode(true);
 
     this._likeButton = this._cardElement.querySelector('.places__like');

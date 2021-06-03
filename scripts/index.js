@@ -25,6 +25,7 @@ const closePopupAdd = document.querySelector('#close-add'); // находим к
 const popupScalePhoto = document.querySelector('#popup-fullsize'); // попап для фото
 const closePopupPhoto = document.querySelector('#close-fullsize'); // кнопка закрыть
 
+const templateContainer = document.querySelector('#card'); // темплейт контейнер с разметкой карточки
 const cardsList = document.querySelector('.places__items'); // находим контейнер для вставки
 
 // функции
@@ -76,7 +77,7 @@ function handleCardFormSubmit(e) {
 // создание карточки
 function createCard(data) {
 
-  const newCard = new Card(data, '#card', showPopup);
+  const newCard = new Card(data, templateContainer, showPopup);
   cardsList.prepend(newCard.render());
 
   return newCard;
@@ -91,16 +92,12 @@ initialCards.forEach((currentItem) => {
 editButton.addEventListener('click', () => {
   inputName.value = existName.textContent;
   inputAbout.value = existAbout.textContent;
-  profileFormValidator.hideErrorMessage(inputName, document.querySelector(`#input-name-error`));
-  profileFormValidator.hideErrorMessage(inputAbout, document.querySelector(`#input-about-error`));
-  profileFormValidator.toggleButtonState();
+  profileFormValidator.resetForm();
   showPopup(popupEdit);
 });
 
 addButton.addEventListener('click', () => {
-  addFormValidator.hideErrorMessage(inputTitle, document.querySelector(`#input-title-error`));
-  addFormValidator.hideErrorMessage(inputLink, document.querySelector(`#input-link-error`));
-  addFormValidator.toggleButtonState();
+  addFormValidator.resetForm();
   formPopupAdd.reset();
   showPopup(popupAdd);
 });
