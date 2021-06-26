@@ -1,9 +1,9 @@
-export default class Card {
-  constructor(data, templateSelector, openPhoto) {
+export class Card {
+  constructor(data, templateSelector, handleCardClick) {
     this._cardTitle = data.name;
     this._cardLink = data.link;
     this._templateSelector = templateSelector;
-    this.openPhoto = openPhoto;
+    this._handleCardClick = handleCardClick;
 
     this._popupScalePhoto = document.querySelector('#popup-fullsize');
 
@@ -29,7 +29,7 @@ export default class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => this._handleLikeClick());
     this._trashButton.addEventListener('click', () => this._handleRemoveClick());
-    this._cardImage.addEventListener('click', () => this._handleOpenPhoto());
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._cardLink, this._cardTitle));
   }
 
   _handleLikeClick() {
@@ -38,13 +38,6 @@ export default class Card {
 
   _handleRemoveClick() {
     this._cardElement.remove();
-  }
-
-  _handleOpenPhoto() {
-    this._photoPopup.src = this._cardLink;
-    this._photoPopup.alt = `Фото ${this._cardTitle}`;
-    this._captionPopup.textContent = this._cardTitle;
-    this.openPhoto(this._popupScalePhoto);
   }
 
   render() {
