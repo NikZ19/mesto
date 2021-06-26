@@ -1,25 +1,20 @@
 import './index.css';
 import { initialCards } from '../utils/initial-сards.js';
-import { config } from '../utils/config';
+import { config } from '../utils/config.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { PopupWithForm } from '../components/PopupWithForm';
-import { PopupWithImage } from '../components/PopupWithImage';
-import { GetUserInfo } from '../components/GetUserInfo';
-
-const formPopupAdd = document.forms.form_add; // форма добавления карточки
-
-const formPopupEdit = document.forms.form_edit; //  форма редактирвания профиля
-const inputName = formPopupEdit.input_name; //  инпут имени
-const inputAbout = formPopupEdit.input_about; // инпут описания
-
-const editButton = document.querySelector('.profile__edit-btn'); // кнопка редактирования профиля
-const addButton = document.querySelector('.profile__add-btn'); // кнопка добавления карточки
-
-const templateContainer = document.querySelector('#card'); // темплейт контейнер с разметкой карточки
-
-
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { GetUserInfo } from '../components/GetUserInfo.js';
+import {
+  formPopupAdd,
+  inputName,
+  inputAbout,
+  editButton,
+  addButton,
+  templateContainer
+} from '../utils/constants.js';
 
 // функции
 const handleCardClick = (image, title) => imagePopup.open(image, title);
@@ -55,7 +50,7 @@ editPopup.setEventListeners();
 const imagePopup = new PopupWithImage('#popup-fullsize');
 imagePopup.setEventListeners();
 
-const userInfo = new GetUserInfo({name: '.profile__name', about: '.profile__about'});
+const userInfo = new GetUserInfo({ name: '.profile__name', about: '.profile__about' });
 
 const profileFormValidator = new FormValidator(config, document.querySelector(`form[name="form_edit"]`));
 profileFormValidator.enableValidation();
