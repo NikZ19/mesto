@@ -6,7 +6,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
-import { GetUserInfo } from '../components/GetUserInfo.js';
+import { UserInfo } from '../components/UserInfo.js';
 import {
   formPopupAdd,
   inputName,
@@ -50,7 +50,7 @@ editPopup.setEventListeners();
 const imagePopup = new PopupWithImage('#popup-fullsize');
 imagePopup.setEventListeners();
 
-const userInfo = new GetUserInfo({ name: '.profile__name', about: '.profile__about' });
+const userInfo = new UserInfo({ name: '.profile__name', about: '.profile__about' });
 
 const profileFormValidator = new FormValidator(config, document.querySelector(`form[name="form_edit"]`));
 profileFormValidator.enableValidation();
