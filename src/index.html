@@ -17,16 +17,18 @@
   <main class="content root__container">
     <section class="profile">
       <div class="profile__info">
-        <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Аватар">
+        <button class="profile__avatar-edit-btn" type="button" aria-label="Кнопка редактирования аватара">
+          <img class="profile__avatar" src="#" alt="Аватар">
+        </button>
         <div class="profile__text">
           <div class="profile__name-wrapper">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-btn" type="button" aria-label="Кнопка редактировать"></button>
+            <h1 class="profile__name">Имя Пользователя</h1>
+            <button class="profile__edit-btn" type="button" aria-label="Кнопка редактирования профиля"></button>
           </div>
           <p class="profile__about">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add-btn" type="submit" aria-label="Кнопка добавить"></button>
+      <button class="profile__add-btn" type="submit" aria-label="Кнопка добавления новой карточки"></button>
     </section>
     <section class="places">
       <ul class="places__items">
@@ -55,6 +57,20 @@
     </div>
   </div>
 
+  <div class="popup" id="popup-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="form_avatar" novalidate>
+        <input class="popup__input" name="input_link" id="input-link" type="url" placeholder="Ссылка на картинку"
+          required>
+        <span class="popup__error" id="input-link-error"></span>
+        <button class="popup__save-btn" name="submit_btn_avatar" type="submit"
+          aria-label="Кнопка сохранить">Сохранить</button>
+      </form>
+      <button class="popup__close-btn" id="close-edit" type="button" aria-label="Кнопка закрыть"></button>
+    </div>
+  </div>
+
   <div class="popup" id="popup-add">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
@@ -66,8 +82,17 @@
           required>
         <span class="popup__error" id="input-link-error"></span>
         <button class="popup__save-btn" name="submit_btn_add" type="submit"
-          aria-label="Кнопка сохранить">Сохранить</button>
+          aria-label="Кнопка сохранить">Создать</button>
       </form>
+      <button class="popup__close-btn" id="close-add" type="button" aria-label="Кнопка закрыть"></button>
+    </div>
+  </div>
+
+  <div class="popup" id="popup-confirm">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__save-btn" name="btn_confirm" type="button"
+        aria-label="Кнопка подтверждения удаления">Да</button>
       <button class="popup__close-btn" id="close-add" type="button" aria-label="Кнопка закрыть"></button>
     </div>
   </div>
@@ -86,7 +111,10 @@
       <button class="places__trash" type="button" aria-label="Кнопка удалить"></button>
       <div class="places__info">
         <h2 class="places__title"></h2>
-        <button class="places__like" type="button" aria-label="Лайк"></button>
+        <div class="place__like-wrapper">
+          <button class="places__like" type="button" aria-label="Лайк"></button>
+          <span class="place__like-counter">0</span>
+        </div>
       </div>
     </li>
   </template>
