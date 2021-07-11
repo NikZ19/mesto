@@ -13,6 +13,8 @@ const avatarButton = document.querySelector('.profile__avatar-edit-btn'); // к�
 
 const templateContainer = document.querySelector('#card'); // темплейт контейнер с разметкой карточки
 
+const keyEsc = 'Escape';
+
 export {
   formPopupAdd,
   inputName,
@@ -23,5 +25,6 @@ export {
   editButton,
   addButton,
   avatarButton,
-  templateContainer
+  templateContainer,
+  keyEsc
 };

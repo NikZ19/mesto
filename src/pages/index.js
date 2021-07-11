@@ -82,11 +82,12 @@ const addPopup = new PopupWithForm('#popup-add', (cardData) => {
   addSubmitButton.textContent = 'Сохранение...';
   api.addNewCard(cardData)
     .then((result) => {
-      renderCards.addItem(result)
+      renderCards.addItem(result);
+      addPopup.close();
     })
     .catch(err => console.log(err))
     .finally(() => addSubmitButton.textContent = 'Создать');
-  addPopup.close();
+
 });
 addPopup.setEventListeners();
 
